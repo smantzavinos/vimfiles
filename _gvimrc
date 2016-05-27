@@ -1,0 +1,6 @@
+" Turn on solarized colorscheme
+syntax enable
+set background=dark
+colorscheme solarized
+
+set lines=80 columns=120
