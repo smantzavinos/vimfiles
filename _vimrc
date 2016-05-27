@@ -95,6 +95,17 @@ nmap <F8> :TagbarToggle<CR>
 " Map <leader> lc (latex compile) call latexmk 
 nnoremap <leader>lc :!latexmk -pdf %:p<CR>
 
+" use gj and gk instead of j and k to handle long lines of text easier
+nnoremap j gj
+nnoremap k gk
+
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
+
 " Set the font to Consolas
 set guifont=Consolas
 

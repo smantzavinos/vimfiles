@@ -1,6 +1,6 @@
 " ~\vimfiles\sessions\CoreTechReport.vim:
 " Vim session script.
-" Created by session.vim 2.13.1 on 27 May 2016 at 09:25:32.
+" Created by session.vim 2.13.1 on 27 May 2016 at 15:55:46.
 " Open this file in Vim and run :source % to restore your session.
 
 set guioptions=egmrLtT
@@ -19,20 +19,22 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
+cd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\tex
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 CoreTech.tex
-badd +1 mystyle.sty
-badd +12 tex\PointCloud.tex
-badd +1 tex\title.tex
-badd +1 tex\mystyle.tex
+badd +1 \Users\smantzavinos\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\CoreTech.tex
+badd +1 \Users\smantzavinos\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\mystyle.sty
+badd +12 PointCloud.tex
+badd +1 title.tex
+badd +1 mystyle.tex
+badd +1 CrossCorr.tex
+badd +0 mystyle.sty
 argglobal
 silent! argdel *
 set stal=2
-edit tex\title.tex
+edit title.tex
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -48,13 +50,13 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 7 - ((6 * winheight(0) + 30) / 60)
+let s:l = 7 - ((6 * winheight(0) + 31) / 62)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 7
 normal! 017|
-tabedit mystyle.sty
+tabedit \Users\smantzavinos\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\mystyle.sty
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -75,8 +77,8 @@ if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
-normal! 021|
-tabedit CoreTech.tex
+normal! 0
+tabedit \Users\smantzavinos\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\CoreTech.tex
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -92,13 +94,35 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 25 - ((24 * winheight(0) + 30) / 60)
+let s:l = 41 - ((40 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-25
-normal! 028|
-tabedit tex\PointCloud.tex
+41
+normal! 07|
+tabedit CrossCorr.tex
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 104 - ((6 * winheight(0) + 30) / 60)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+104
+normal! 0562|
+tabedit PointCloud.tex
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
