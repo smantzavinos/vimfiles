@@ -67,6 +67,9 @@ Plugin 'xolox/vim-session'
 " vim-session dependency
 Plugin 'xolox/vim-misc'
 
+" Simplify Doxygen documentation in C, C++, and Python.
+Plugin 'DoxygenToolkit.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -105,6 +108,8 @@ set tabstop=4
 set shiftwidth=4
 " On pressing tab, insert 4 spaces
 set expandtab
+" Backspacing over a tab (4 spaces) backspaces 4 spaces
+set softtabstop=4
 
 " Set the font to Consolas
 set guifont=Consolas

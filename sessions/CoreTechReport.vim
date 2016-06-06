@@ -1,6 +1,6 @@
 " ~\vimfiles\sessions\CoreTechReport.vim:
 " Vim session script.
-" Created by session.vim 2.13.1 on 27 May 2016 at 15:55:46.
+" Created by session.vim 2.13.1 on 03 June 2016 at 10:56:57.
 " Open this file in Vim and run :source % to restore your session.
 
 set guioptions=egmrLtT
@@ -19,22 +19,25 @@ if &cp | set nocp | endif
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\tex
+cd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 \Users\smantzavinos\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\CoreTech.tex
-badd +1 \Users\smantzavinos\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\mystyle.sty
-badd +12 PointCloud.tex
-badd +1 title.tex
-badd +1 mystyle.tex
-badd +1 CrossCorr.tex
-badd +0 mystyle.sty
+badd +1 CoreTech.tex
+badd +1 mystyle.sty
+badd +12 tex\PointCloud.tex
+badd +1 tex\title.tex
+badd +1 tex\mystyle.tex
+badd +1 tex\CrossCorr.tex
+badd +1 tex\mystyle.sty
+badd +1 AnalogicHeader.sty
+badd +1 AnalogicHeaderTemplate.sty
+badd +1 tex\SagSweepVerify.tex
 argglobal
 silent! argdel *
 set stal=2
-edit title.tex
+edit tex\title.tex
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -50,13 +53,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 7 - ((6 * winheight(0) + 31) / 62)
+let s:l = 4 - ((3 * winheight(0) + 31) / 62)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-7
-normal! 017|
-tabedit \Users\smantzavinos\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\mystyle.sty
+4
+normal! 044|
+lcd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
+tabedit ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\mystyle.sty
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -72,13 +76,83 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 30) / 60)
+let s:l = 33 - ((32 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+33
+normal! 040|
+lcd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
+tabedit ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\AnalogicHeader.sty
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 30 - ((29 * winheight(0) + 30) / 60)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+30
+normal! 082|
+lcd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
+tabedit ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\CoreTech.tex
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 19 - ((18 * winheight(0) + 30) / 60)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+19
+normal! 027|
+lcd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
+tabedit ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\tex\SagSweepVerify.tex
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let s:l = 84 - ((31 * winheight(0) + 30) / 60)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+84
 normal! 0
-tabedit \Users\smantzavinos\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\CoreTech.tex
+lcd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
+tabedit ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\tex\PointCloud.tex
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -94,13 +168,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 41 - ((40 * winheight(0) + 30) / 60)
+let s:l = 34 - ((24 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-41
-normal! 07|
-tabedit CrossCorr.tex
+34
+normal! 015|
+lcd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
+tabedit ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies\tex\CrossCorr.tex
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
@@ -116,35 +191,14 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-let s:l = 104 - ((6 * winheight(0) + 30) / 60)
+let s:l = 14 - ((13 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-104
-normal! 0562|
-tabedit PointCloud.tex
-set splitbelow splitright
-set nosplitbelow
-set nosplitright
-wincmd t
-set winheight=1 winwidth=1
-argglobal
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal fen
-silent! normal! zE
-let s:l = 11 - ((10 * winheight(0) + 30) / 60)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-11
-normal! 08|
-tabnext 3
+14
+normal! 0
+lcd ~\Documents\Reports\2016_05_26_FusionTech\CoreTechnologies
+tabnext 5
 set stal=1
 if exists('s:wipebuf')
 "   silent exe 'bwipe ' . s:wipebuf
@@ -162,7 +216,7 @@ let &so = s:so_save | let &siso = s:siso_save
 " by :mksession out of the box).
 
 1wincmd w
-tabnext 3
+tabnext 5
 if exists('s:wipebuf')
   if empty(bufname(s:wipebuf))
 if !getbufvar(s:wipebuf, '&modified')
