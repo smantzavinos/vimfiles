@@ -102,6 +102,9 @@ nnoremap <leader>lc :!latexmk -pdf %:p<CR>
 nnoremap j gj
 nnoremap k gk
 
+" ctrl-backspace will delete to beginning of word in insert mode
+inoremap <C-BS> <C-W>
+
 " show existing tab with 4 spaces width
 set tabstop=4
 " when indenting with '>', use 4 spaces width
