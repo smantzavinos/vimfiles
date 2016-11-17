@@ -70,6 +70,12 @@ Plugin 'xolox/vim-misc'
 " Simplify Doxygen documentation in C, C++, and Python.
 Plugin 'DoxygenToolkit.vim'
 
+" Automated tag generation and syntax highlighting in VIM
+Plugin 'xolox/vim-easytags'
+
+" C/C++ omni-completion with ctags database
+"Plugin 'OmniCppComplete'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -133,8 +139,12 @@ let g:startify_list_order = [
     \ ]
 
 
-" Set the path to the ctags directory. ctags is a dependency of Tagbar
+" Set the path to the ctags directory for Tagbar plugin. ctags is a dependency of Tagbar
 let g:tagbar_ctags_bin = '$HOME/vimfiles/depends/ctags58/ctags.exe'
+
+" Set the path to the ctags directory for easytags plugin.
+" For some reason this isn't workin. I still had to add this dir to my PATH
+let g:easytags_cmd = '$HOME/vimfiles/depends/ctags58/'
 
 " Add the dependecies folder to the path
 let s:dependsdir = $HOME . '\vimfiles\depends'
