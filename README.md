@@ -10,3 +10,35 @@
   3. `mklink /H .NERDTreeBookmarks vimfiles\.NERDTreeBookmarks`
 
 3. Enjoy!
+
+
+## Installation/setup on Linux
+
+1. Navigate to home directory:
+```
+cd ~
+```
+
+2. Clone the repository:
+```
+git clone https://github.com/smantzavinos/vimfiles
+```
+
+3. Create a symlink to the vimrc file
+```
+ln -s vimfiles/_vimrc .vimrc
+```
+
+4. Update Vundle (vim package manager), which is saved as a git submodule:
+```
+cd vimfiles
+git submodule init
+git submodule update
+```
+OR
+```
+cd vimfiles
+git submodule update --init
+```
+
+5. Install plugins using vundle by launching vim and running `:PluginInstall`.
