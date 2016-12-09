@@ -1,6 +1,9 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+let necompleteEnable=0
+let vimcompletesmeEnable=1
+
 " set the runtime path to include Vundle and initialize
 set rtp+=$HOME/vimfiles/bundle/Vundle.vim
 call vundle#begin('$HOME/vimfiles/bundle')
@@ -29,8 +32,14 @@ Plugin 'tpope/vim-surround'
 " Better line numbers
 Plugin 'myusuf3/numbers.vim'
 
-" Next generation completion framework
-Plugin 'shougo/neocomplete.vim'
+if has('lua') && neocompleteEnable
+    " Next generation completion framework
+    Plugin 'shougo/neocomplete.vim'
+end
+
+if has('python') && vimcompletesmeEnable
+    Plugin 'ajh17/vimcompletesme'
+end
 
 " Tag generation and navigation
 Plugin 'majutsushi/tagbar'
@@ -57,16 +66,19 @@ Plugin 'gcmt/taboo.vim'
 " Vim start screen
 Plugin 'mhinz/vim-startify'
 
+" Vim session isn't really needed when using Startify
 " Vim session manager
-Plugin 'xolox/vim-session'
+"Plugin 'xolox/vim-session'
 " vim-session dependency
-Plugin 'xolox/vim-misc'
+"Plugin 'xolox/vim-misc'
 
 " Simplify Doxygen documentation in C, C++, and Python.
 Plugin 'DoxygenToolkit.vim'
 
 " Automated tag generation and syntax highlighting in VIM
 Plugin 'xolox/vim-easytags'
+" vim-easytags dependency
+Plugin 'xolox/vim-misc'
 
 " C/C++ omni-completion with ctags database
 "Plugin 'OmniCppComplete'
@@ -121,11 +133,15 @@ set guifont=Consolas
 " Display line numbers
 set number
 
-" Set startify sessions folder to the vim-session default folder
- let g:startify_session_dir = '$HOME\vimfiles\sessions'
+if has('win32') || has('win64')
+    let g:startify_session_dir = "$HOME/vimfiles/sessions"
+    let g:startify_bookmarks = [ '$HOME/.vimrc' ]
+else
+    let g:startify_session_dir = "~/.vim/sessions"
+    let g:startify_bookmarks = [ '~/.vimrc' ]
+endif
 
 " Set Startify list order
-" let g:startify_list_order = ['sessions', 'files', 'dir', 'bookmarks']
 let g:startify_list_order = [
     \ ['Sessions:'], 'sessions',
     \ ['Most recently used files:'], 'files',
@@ -134,17 +150,18 @@ let g:startify_list_order = [
     \ ]
 
 
-" Set the path to the ctags directory for Tagbar plugin. ctags is a dependency of Tagbar
-let g:tagbar_ctags_bin = '$HOME/vimfiles/depends/ctags58/ctags.exe'
+" Set the path to the ctags directory for Tagbar plugin. ctags is a dependency of Tagbar.
+" ctags should be in they system path on a unix system.
+if (has('win32') || has('win64'))
+    let g:tagbar_ctags_bin = '$HOME/vimfiles/depends/ctags58/ctags.exe'
+endif
 
 " Set the path to the ctags directory for easytags plugin.
 " For some reason this isn't workin. I still had to add this dir to my PATH
-let g:easytags_cmd = '$HOME/vimfiles/depends/ctags58/'
+"let g:easytags_cmd = '$HOME/vimfiles/depends/ctags58/'
 
 " Add the dependecies folder to the path
-let s:dependsdir = $HOME . '\vimfiles\depends'
-"let s:dependsdir = 'C:\Users\smantzavinos\vimfiles\depends'
-" Add PortablePython's path to $PATH if running on Windows and PortablePython exists
+let s:dependsdir = $HOME . '/vimfiles/depends'
 if (has('win32') || has('win64')) && isdirectory(s:dependsdir)
     let $PATH .= ';' . s:dependsdir
 endif
@@ -173,87 +190,94 @@ map <leader>tm :tabmove<cr>
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/<cr>
 
-" With the following mappings (which require gvim), you can press Ctrl-Left or Ctrl-Right to go to the previous or next tabs, and can press Alt-Left or Alt-Right to move the current tab to the left or right.
-nnoremap <C-Left> :tabprevious<CR>
-nnoremap <C-Right> :tabnext<CR>
-nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <A-Right> :execute 'silent! tabmove ' . tabpagenr()<CR>
+" Mappings to cycle through tabs
+nnoremap <C-n> gT
+nnoremap <C-m> gt
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" neocomplete settings
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Set Dox command (doxygen) to use /// instead of /* */ for C/C++
+let g:DoxygenToolkit_commentType = "C++"
 
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+if has('lua') && neocompleteEnable
+    " neocomplete settings
+    "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+    " Define dictionary.
+    let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
 
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+    " Define keyword.
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+    " Plugin key-mappings.
+    inoremap <expr><C-g>     neocomplete#undo_completion()
+    inoremap <expr><C-l>     neocomplete#complete_common_string()
 
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
+    " Recommended key-mappings.
+    " <CR>: close popup and save indent.
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+      return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+      " For no inserting <CR> key.
+      "return pumvisible() ? "\<C-y>" : "\<CR>"
+    endfunction
+    " <TAB>: completion.
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " <C-h>, <BS>: close popup and delete backword char.
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+    " Close popup by <Space>.
+    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+    " AutoComplPop like behavior.
+    "let g:neocomplete#enable_auto_select = 1
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    " Shell like behavior(not recommended).
+    "set completeopt+=longest
+    "let g:neocomplete#enable_auto_select = 1
+    "let g:neocomplete#disable_auto_complete = 1
+    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+    " Enable heavy omni completion.
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+      let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+    "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+    "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+    "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
+    " For perlomni.vim setting.
+    " https://github.com/c9s/perlomni.vim
+    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+end
+
+if has('python') && vimcompletesmeEnable
+    " Make Enter key select current value without inserting new line
+    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+end
 
 
