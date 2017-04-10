@@ -26,11 +26,17 @@ Plugin 'scrooloose/syntastic'
 " Fuzzy file, buffer, mru, tag, etc finder.
 Plugin 'kien/ctrlp.vim'
 
+" A plugin to show a diff whenever recovering a buffer
+Plugin 'chrisbra/recover.vim'
+
 " quoting/parenthesizing made simple.
 Plugin 'tpope/vim-surround'
 
 " Better line numbers
-Plugin 'myusuf3/numbers.vim'
+"Plugin 'myusuf3/numbers.vim'
+
+" Lines to indicate indentation level
+Plugin 'Yggdroot/indentLine'
 
 if has('lua') && neocompleteEnable
     " Next generation completion framework
@@ -79,6 +85,13 @@ Plugin 'DoxygenToolkit.vim'
 Plugin 'xolox/vim-easytags'
 " vim-easytags dependency
 Plugin 'xolox/vim-misc'
+" Currently needed for easytags_async option on windows
+if has('win32') || has('win64')
+    Plugin 'xolox/vim-shell'
+endif
+
+" Many python utilities
+Plugin 'klen/python-mode'
 
 " C/C++ omni-completion with ctags database
 "Plugin 'OmniCppComplete'
@@ -133,6 +146,15 @@ set guifont=Consolas
 " Display line numbers
 set number
 
+" Uncomment this if using a 256 color terminal
+"set term=xterm-256color
+"set t_Co=256
+
+" colorscheme settings
+syntax enable
+set background=dark
+colorscheme solarized
+
 if has('win32') || has('win64')
     let g:startify_session_dir = "$HOME/vimfiles/sessions"
     let g:startify_bookmarks = [ '$HOME/.vimrc' ]
@@ -149,12 +171,91 @@ let g:startify_list_order = [
     \ ['Bookmarks:'], 'bookmarks',
     \ ]
 
+"" Easytags settings
+" Update tags in the background
+let g:easytags_async = 1
+" Create project specific tag files instead of global
+let g:easytags_dynamic_files = 2
 
 " Set the path to the ctags directory for Tagbar plugin. ctags is a dependency of Tagbar.
 " ctags should be in they system path on a unix system.
 if (has('win32') || has('win64'))
     let g:tagbar_ctags_bin = '$HOME/vimfiles/depends/ctags58/ctags.exe'
 endif
+
+"" python-mode settings
+" Enable
+let g:pymode = 1
+" Trim whitespace on save
+let g:pymode_trim_whitespaces = 1
+" Use python 3 syntax checking (comment out to auto-detect supported python version)
+"let g:pymode_python = 'python3'
+" Max line length
+let g:pymode_options_max_line_length = 100
+" Setup pymode quickfix window
+let g:pymode_quickfix_minheight = 3
+let g:pymode_quickfix_maxheight = 6
+" Enable PEP8-complatible python indentation
+let g:pymode_indent = 1
+" Fast and usual python code folding
+let g:pymode_folding = 1
+" Support vim motion for python objects
+let g:pymode_motion = 1
+" Enable show documentation and bind to K
+let g:pymode_doc = 0
+let g:pymode_doc_bind = 'K'
+" Disable auto documentation pop window
+set completeopt=menu
+
+" Bind <leader>r to run script
+let g:pymode_run = 1
+let g:pymode_run_bind = '<leader>r'
+" Set breakpoints with <leader>b
+let g:pymode_breakpoint = 1
+let g:pymode_breakpoint_bind = '<leader>b'
+" Set breakpoint command to auto detect
+let g:pymode_breakpoint_cmd = ''
+
+" Turn on code checking
+let g:pymode_lint = 1
+" Check on every save, even if no changes made
+let g:pymode_lint_on_write = 1
+let g:pymode_lint_unmodified = 1
+" Check code on editing on the fly
+let g:pymode_lint_on_fly = 0
+" Show error message if cursor placed at the error line
+let g:pymode_lint_message = 1
+" Set code checkers to use
+"let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint']
+let g:pymode_lint_checkers = ['pep8', 'pylint', 'mccabe', 'pyflakes']
+let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_length}
+" Auto open cwindow (quickfix) if any error are found
+let g:pymode_lint_cwindow = 0
+" Place error signs
+let g:pymode_lint_signs = 1
+
+"" Add pymode rope settings here **
+" Turn rope off for now. So damn slow.
+let g:pymode_rope=0
+
+
+" Syntastic settings (for now just default ones)
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Don't run sytastic checks on python files because python-mode plugin already
+" does this.
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": ["python"] }
+
 
 " Set the path to the ctags directory for easytags plugin.
 " For some reason this isn't workin. I still had to add this dir to my PATH
