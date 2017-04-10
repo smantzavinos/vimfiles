@@ -147,8 +147,8 @@ set guifont=Consolas
 set number
 
 " Uncomment this if using a 256 color terminal
-set term=xterm-256color
-set t_Co=256
+"set term=xterm-256color
+"set t_Co=256
 
 " colorscheme settings
 syntax enable
