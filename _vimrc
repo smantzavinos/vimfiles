@@ -1,7 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-let necompleteEnable=0
+let neocompleteEnable=0
 let vimcompletesmeEnable=1
 
 " set the runtime path to include Vundle and initialize
@@ -147,8 +147,8 @@ set guifont=Consolas
 set number
 
 " Uncomment this if using a 256 color terminal
-"set term=xterm-256color
-"set t_Co=256
+set term=xterm-256color
+set t_Co=256
 
 " colorscheme settings
 syntax enable
