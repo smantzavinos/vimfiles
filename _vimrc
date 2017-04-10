@@ -1,7 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-let necompleteEnable=0
+let neocompleteEnable=0
 let vimcompletesmeEnable=1
 
 " set the runtime path to include Vundle and initialize
