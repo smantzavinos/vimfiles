@@ -1,0 +1,4 @@
+# Keep unix line endings on vimrc and .vim files
+# regardless of current operating system
+*vimrc text eol=lf
+*.vim text eol=lf
