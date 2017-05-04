@@ -155,6 +155,9 @@ syntax enable
 set background=dark
 colorscheme solarized
 
+" Fix for airline not showing up until a split is created
+set laststatus=2
+
 if has('win32') || has('win64')
     let g:startify_session_dir = "$HOME/vimfiles/sessions"
     let g:startify_bookmarks = [ '$HOME/.vimrc' ]
