@@ -1,8 +1,9 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+let YouCompleteMeEnable=1
 let neocompleteEnable=0
-let vimcompletesmeEnable=1
+let vimcompletesmeEnable=0
 
 " set the runtime path to include Vundle and initialize
 set rtp+=$HOME/vimfiles/bundle/Vundle.vim
@@ -37,6 +38,10 @@ Plugin 'tpope/vim-surround'
 
 " Lines to indicate indentation level
 Plugin 'Yggdroot/indentLine'
+
+if YouCompleteMeEnable
+    Plugin 'valloric/youcompleteme'
+end
 
 if has('lua') && neocompleteEnable
     " Next generation completion framework
@@ -231,6 +236,7 @@ let g:pymode_lint_message = 1
 " Set code checkers to use
 "let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe', 'pylint']
 let g:pymode_lint_checkers = ['pep8', 'pylint', 'mccabe', 'pyflakes']
+"let g:pymode_lint_checkers = ['pep8', 'mccabe', 'pyflakes']
 let g:pymode_lint_options_pep8 = {'max_line_length': g:pymode_options_max_line_length}
 " Auto open cwindow (quickfix) if any error are found
 let g:pymode_lint_cwindow = 0
@@ -367,16 +373,16 @@ if has('lua') && neocompleteEnable
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
     " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-      let g:neocomplete#sources#omni#input_patterns = {}
-    endif
+    "if !exists('g:neocomplete#sources#omni#input_patterns')
+      "let g:neocomplete#sources#omni#input_patterns = {}
+    "endif
     "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
     "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
     "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
     " For perlomni.vim setting.
     " https://github.com/c9s/perlomni.vim
-    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+    "let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 end
 
 if has('python') && vimcompletesmeEnable
