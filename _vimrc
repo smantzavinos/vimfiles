@@ -11,49 +11,23 @@ Plugin 'VundleVim/Vundle.vim'
 " Git plugin
 Plugin 'tpope/vim-fugitive'
 
-" A tree explorer plugin
-"Plugin 'scrooloose/nerdtree'
+" Solarized plugin that works well with neovim
+Plugin 'icymind/neosolarized'
 
-" Comment plugin
-"Plugin 'scrooloose/nerdcommenter'
+" Language server protocol plugin
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/vim-lsp'
 
-" Syntax checking hacks for vim
-"Plugin 'scrooloose/syntastic'
-
-" Fuzzy file, buffer, mru, tag, etc finder.
-"Plugin 'kien/ctrlp.vim'
-
-" A plugin to show a diff whenever recovering a buffer
-"Plugin 'chrisbra/recover.vim'
+" Provides following commands to auto install language servers
+" :LspInstallServer
+" :LspUninstallServer
+Plugin 'mattn/vim-lsp-settings'
 
 " quoting/parenthesizing made simple.
 Plugin 'tpope/vim-surround'
 
-" Better line numbers
-"Plugin 'myusuf3/numbers.vim'
-
 " Lines to indicate indentation level
 Plugin 'Yggdroot/indentLine'
-
-" Plugin to quickly switch between source and header files
-"Plugin 'a.vim'
-
-" Lean & mean status/tabline for vim that's light as air
-"Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
-
-" Plugin to manage undo tree
-"Plugin 'sjl/gundo.vim'
-
-" Plugin for tab management (rename tabs)
-"Plugin 'gcmt/taboo.vim'
-
-" Vim start screen
-"Plugin 'mhinz/vim-startify'
-
-" Simplify Doxygen documentation in C, C++, and Python.
-"Plugin 'DoxygenToolkit.vim'
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -132,10 +106,6 @@ nnoremap <C-m> gt
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" colorscheme settings
-"syntax enable
-"set background=dark
-"colorscheme solarized
 
 " Add the dependecies folder to the path
 let s:dependsdir = $HOME . '/vimfiles/depends'
@@ -143,50 +113,24 @@ if (has('win32') || has('win64')) && isdirectory(s:dependsdir)
     let $PATH .= ';' . s:dependsdir
 endif
 
+"syntax enable
+
 
 " ~~~~~~~~~~~~ Plugin setttings
 
-" Fix for airline not showing up until a split is created
-"set laststatus=2
+" colorscheme settings
+set termguicolors
+set background=dark
+colorscheme neosolarized
 
-"if has('win32') || has('win64')
-"    let g:startify_session_dir = "$HOME/vimfiles/sessions"
-"    let g:startify_bookmarks = [ '$HOME/.vimrc' ]
-"else
-"    let g:startify_session_dir = "~/.vim/sessions"
-"    let g:startify_bookmarks = [ '~/.vimrc' ]
-"endif
+" vim-lsp settings
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_virtual_text_enabled = 0
+let g:lsp_highlight_references_enabled = 1
 
-" Set Startify list order
-"let g:startify_list_order = [
-"    \ ['Sessions:'], 'sessions',
-"    \ ['Most recently used files:'], 'files',
-"    \ ['Most recently used files in the current directory:'], 'dir',
-"    \ ['Bookmarks:'], 'bookmarks',
-"    \ ]
-
-
-
-" Syntastic settings (for now just default ones)
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 0
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
-" Don't run sytastic checks on python files because python-mode plugin already
-" does this.
-"let g:syntastic_mode_map = {
-"    \ "mode": "active",
-"    \ "active_filetypes": [],
-"    \ "passive_filetypes": ["python"] }
-
-
-
-" Set Dox command (doxygen) to use /// instead of /* */ for C/C++
-"let g:DoxygenToolkit_commentType = "C++"
-
+" ~~~~~~~~~~~ Startup commands
+"
+" Start in $HOME directory
+cd $HOME
 
