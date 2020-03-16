@@ -18,10 +18,16 @@ Plugin 'icymind/neosolarized'
 Plugin 'prabirshrestha/async.vim'
 Plugin 'prabirshrestha/vim-lsp'
 
+" Auto completion using the language server
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'prabirshrestha/asyncomplete-lsp.vim'
+
 " Provides following commands to auto install language servers
 " :LspInstallServer
 " :LspUninstallServer
 Plugin 'mattn/vim-lsp-settings'
+
+Plugin 'mhinz/vim-startify'
 
 " quoting/parenthesizing made simple.
 Plugin 'tpope/vim-surround'

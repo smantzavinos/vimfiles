@@ -42,3 +42,17 @@ git submodule update --init
 ```
 
 5. Install plugins using vundle by launching vim and running `:PluginInstall`.
+
+## Useful commands
+
+### vim-startify
+#### Help
+`:h startify`
+`:h startify-faq`
+
+#### Commands
+`:SLoad`       load a session
+`:SSave[!]`    save a session
+`:SDelete[!]`  delete a session
+`:SClose`      close a session
+
