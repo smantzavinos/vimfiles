@@ -27,7 +27,17 @@ Plugin 'prabirshrestha/asyncomplete-lsp.vim'
 " :LspUninstallServer
 Plugin 'mattn/vim-lsp-settings'
 
+" Fancy start page
 Plugin 'mhinz/vim-startify'
+
+" Full path fuzzy file, buffer, mru, tag, ... finder for Vim
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" C++ syntax highlighting
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" QML syntax highlighting
+Plugin 'peterhoeg/vim-qml'
 
 " quoting/parenthesizing made simple.
 Plugin 'tpope/vim-surround'
@@ -109,6 +119,10 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/<cr>
 nnoremap <C-n> gT
 nnoremap <C-m> gt
 
+" Mappings to move tabs with ALT
+nnoremap <A-n> :tabmove -1<cr>
+nnoremap <A-m> :tabmove +1<cr>
+
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
@@ -134,6 +148,14 @@ let g:lsp_signs_enabled = 1         " enable signs
 let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
 let g:lsp_virtual_text_enabled = 0
 let g:lsp_highlight_references_enabled = 1
+
+" vim-cpp-enhanced-highlight settings
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_posix_standard = 1
+let g:cpp_experimental_template_highlight = 1
+let g:cpp_concepts_highlight = 1
 
 " ~~~~~~~~~~~ Startup commands
 "
