@@ -5,7 +5,9 @@
 1. Clone the repository into $HOME\vimfiles.
 
 2. Set up symlink to _vimrc file. I did that with the following three command (executed from an administrator access command prompt in the home folder):
-  1. `mklink /H _vimrc vimfiles\_vimrc`
+```powershell
+mklink /H _vimrc vimfiles\_vimrc
+```
 
 
 3. Make neovim use the correct vimrc. Create or append to file 
