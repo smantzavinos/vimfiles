@@ -11,6 +11,19 @@
 
 3. Enjoy!
 
+## Neovim setup on Windows
+1. Create or append to file 
+```
+~\AppData\Local\nvim\init.vim
+```
+the following lines
+```
+set runtimepath^=~/vimfiles runtimepath+=~/vimfiles/after
+let &packpath = &runtimepath
+source ~/vimfiles/_vimrc
+```
+as described in (Neovim docs)[https://neovim.io/doc/user/nvim.html#nvim-from-vim]
+
 
 ## Installation/setup on Linux
 
