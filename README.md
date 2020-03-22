@@ -1,18 +1,14 @@
 # vimfiles
 
-## Installation/setup on Windows
+## Installation/setup on Windows using neovim
 
 1. Clone the repository into $HOME\vimfiles.
 
-2. Set up symlinks to _vimrc, _gvimrc, and .NERDTreeBookmarks files. I did that with the following three commands (executed from an administrator access command prompt in the home folder):
+2. Set up symlink to _vimrc file. I did that with the following three command (executed from an administrator access command prompt in the home folder):
   1. `mklink /H _vimrc vimfiles\_vimrc`
-  2. `mklink /H _gvimrc vimfiles\_gvimrc`
-  3. `mklink /H .NERDTreeBookmarks vimfiles\.NERDTreeBookmarks`
 
-3. Enjoy!
 
-## Neovim setup on Windows
-1. Create or append to file 
+3. Make neovim use the correct vimrc. Create or append to file 
 ```
 ~\AppData\Local\nvim\init.vim
 ```
@@ -24,37 +20,17 @@ source ~/vimfiles/_vimrc
 ```
 as described in (Neovim docs)[https://neovim.io/doc/user/nvim.html#nvim-from-vim]
 
-
-## Installation/setup on Linux
-
-1. Navigate to home directory:
-```
-cd ~
-```
-
-2. Clone the repository:
-```
-git clone https://github.com/smantzavinos/vimfiles
+4. Install vim-plug plugin manager. Following the neovim install instructions (here)[https://github.com/junegunn/vim-plug/blob/0c5f0b0528a8d7b9ced56b8f177e98f0ba4d7153/README.md#neovim], run the following in a PowerShell:
+```powershell
+md ~\AppData\Local\nvim\autoload
+$uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+(New-Object Net.WebClient).DownloadFile($uri, $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath("~\AppData\Local\nvim\autoload\plug.vim"))
 ```
 
-3. Create a symlink to the vimrc file
+5. To install plugins, by running vim and executing the command:
 ```
-ln -s vimfiles/_vimrc .vimrc
+:PlugInstall
 ```
-
-4. Update Vundle (vim package manager), which is saved as a git submodule:
-```
-cd vimfiles
-git submodule init
-git submodule update
-```
-OR
-```
-cd vimfiles
-git submodule update --init
-```
-
-5. Install plugins using vundle by launching vim and running `:PluginInstall`.
 
 ## Useful commands
 
