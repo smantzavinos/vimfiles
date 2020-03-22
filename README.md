@@ -18,9 +18,9 @@ set runtimepath^=~/vimfiles runtimepath+=~/vimfiles/after
 let &packpath = &runtimepath
 source ~/vimfiles/_vimrc
 ```
-as described in (Neovim docs)[https://neovim.io/doc/user/nvim.html#nvim-from-vim]
+as described in [Neovim docs](https://neovim.io/doc/user/nvim.html#nvim-from-vim)
 
-4. Install vim-plug plugin manager. Following the neovim install instructions (here)[https://github.com/junegunn/vim-plug/blob/0c5f0b0528a8d7b9ced56b8f177e98f0ba4d7153/README.md#neovim], run the following in a PowerShell:
+4. Install vim-plug plugin manager. Following the neovim install instructions [here](https://github.com/junegunn/vim-plug/blob/0c5f0b0528a8d7b9ced56b8f177e98f0ba4d7153/README.md#neovim), run the following in a PowerShell:
 ```powershell
 md ~\AppData\Local\nvim\autoload
 $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
