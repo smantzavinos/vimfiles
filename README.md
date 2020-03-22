@@ -36,12 +36,16 @@ $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 ### vim-startify
 #### Help
-`:h startify`
-`:h startify-faq`
+```
+:h startify
+:h startify-faq
+```
 
 #### Commands
-`:SLoad`       load a session
-`:SSave[!]`    save a session
-`:SDelete[!]`  delete a session
-`:SClose`      close a session
+```vim
+:SLoad       "load a session
+:SSave[!]    "save a session
+:SDelete[!]  "delete a session
+:SClose      "close a session
+```
 
