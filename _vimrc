@@ -111,28 +111,6 @@ set termguicolors
 set background=dark
 colorscheme neosolarized
 
-" vim-lsp settings
-"let g:lsp_signs_enabled = 1         " enable signs
-"let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-"let g:lsp_virtual_text_enabled = 0
-"let g:lsp_highlight_references_enabled = 1
-
-" ~~ asyncomplete settings
-" Tab completion
-"inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
-" Force refresh completion (should show popup)
-"imap <c-space> <Plug>(asyncomplete_force_refresh)
-
-" vim-cpp-enhanced-highlight settings
-"let g:cpp_class_scope_highlight = 1
-"let g:cpp_member_variable_highlight = 1
-"let g:cpp_class_decl_highlight = 1
-"let g:cpp_posix_standard = 1
-"let g:cpp_experimental_template_highlight = 1
-"let g:cpp_concepts_highlight = 1
-
 " ~~ CoC settings
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -264,6 +242,10 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+
+"" coc-explorer settings
+nnoremap <leader>e :CocCommand explorer<cr>
 
 " ~~~~~~~~~~~ Startup commands
 "
