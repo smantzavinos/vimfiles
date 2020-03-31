@@ -251,7 +251,11 @@ let g:coc_global_extensions = [
         \'coc-highlight',
         \'coc-explorer',
         \'coc-json',
-        \'coc-clangd'
+        \'coc-tsserver',
+        \'coc-svelte',
+        \'coc-json',
+        \'coc-html',
+        \'coc-css'
         \]
 
 
