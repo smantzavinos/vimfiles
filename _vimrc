@@ -10,6 +10,9 @@ Plug 'icymind/neosolarized'
 " CoC - Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" C++ semantic highlighting using lanaguage server protocol
+Plug 'jackguo380/vim-lsp-cxx-highlight'
+
 " Fancy start page
 Plug 'mhinz/vim-startify'
 
@@ -24,6 +27,9 @@ Plug 'tpope/vim-surround'
 
 " Lines to indicate indentation level
 Plug 'Yggdroot/indentLine'
+
+" Elegant statusline
+Plug 'liuchengxu/eleline.vim'
 
 call plug#end()
 
@@ -110,6 +116,9 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 set termguicolors
 set background=dark
 colorscheme neosolarized
+
+" Always show status line (recommended in eleline readme)
+set laststatus=2
 
 " ~~ CoC settings
 " TextEdit might fail if hidden is not set.
