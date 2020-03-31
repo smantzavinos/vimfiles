@@ -244,6 +244,17 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
+"" coc extensions
+let g:coc_global_extensions = [
+        \'coc-marketplace',
+        \'coc-lists',
+        \'coc-highlight',
+        \'coc-explorer',
+        \'coc-json',
+        \'coc-clangd'
+        \]
+
+
 "" coc-explorer settings
 nnoremap <leader>e :CocCommand explorer<cr>
 
