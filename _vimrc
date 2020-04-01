@@ -265,7 +265,7 @@ let g:coc_global_extensions = [
 
 
 "" coc-explorer settings
-nnoremap <leader>e :CocCommand explorer<cr>
+nnoremap <leader>e :<C-u>CocCommand explorer<cr>
 
 " ~~~~~~~~~~~ Startup commands
 "
