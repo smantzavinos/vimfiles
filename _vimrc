@@ -31,6 +31,19 @@ Plug 'Yggdroot/indentLine'
 " Elegant statusline
 Plug 'liuchengxu/eleline.vim'
 
+" Case keeping search and replace (and other things)
+Plug 'tpope/vim-abolish'
+
+" Tab utilities. Mainly tab renaming.
+" Plug 'gcmt/taboo.vim'
+Plug 'webdevel/tabulous'
+
+" Lines to indicate indentation level
+Plug 'Yggdroot/indentLine'
+
+" Comment code shortcuts
+Plug 'scrooloose/nerdcommenter'
+
 call plug#end()
 
 " Map F2 to open NERDTree
@@ -109,6 +122,22 @@ endif
 " Get correct comment highlighting in json files with comments.
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+" Remember tab names in session file
+set sessionoptions+=tabpages,globals
+
+" Restore folds with session files
+set sessionoptions+=folds
+
+" Map F5 to check if any buffers have changed on disk
+nnoremap <F5> :<C-u>checktime<cr>
+
+" Add a marker at column 100
+set colorcolumn=100
+
+" Use terminal style tabs in GUI versions of vim
+"set guioptions-=e
+"set guitabline=0
+
 
 " ~~~~~~~~~~~~ Plugin setttings
 
@@ -119,6 +148,9 @@ colorscheme neosolarized
 
 " Always show status line (recommended in eleline readme)
 set laststatus=2
+
+" Rename tab shortcut
+nnoremap <leader>tr :<C-u>call g:tabulous#renameTab()<cr>
 
 " ~~ CoC settings
 " TextEdit might fail if hidden is not set.
