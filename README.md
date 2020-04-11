@@ -34,6 +34,15 @@ $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 :PlugInstall
 ```
 
+6. If you want to use terminal tabs instead of Qt based tabs in nvim-qt, create or append to file 
+```
+~\AppData\Local\nvim\ginit.vim
+```
+the following line
+```
+GuiTabline 0
+```
+
 ## Useful commands
 
 ### vim-startify
