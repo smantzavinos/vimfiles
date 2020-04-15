@@ -34,13 +34,23 @@ $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 :PlugInstall
 ```
 
-6. If you want to use terminal tabs instead of Qt based tabs in nvim-qt, create or append to file 
+## Optional: nvim-qt GUI config
+1. If you want to use terminal tabs instead of Qt based tabs in nvim-qt, create or append to file 
 ```
 ~\AppData\Local\nvim\ginit.vim
 ```
 the following line
 ```
 GuiTabline 0
+```
+
+2. If you want to use terminal popup menu instead of Qt based menu in nvim-qt, create or append to file 
+```
+~\AppData\Local\nvim\ginit.vim
+```
+the following line
+```
+GuiPopupmenu 0
 ```
 
 ## Useful commands
@@ -58,5 +68,11 @@ GuiTabline 0
 :SSave[!]    "save a session
 :SDelete[!]  "delete a session
 :SClose      "close a session
+```
+
+### nvim-qt
+```vim
+:GuiFont                  " get current font
+:GuiFont Consolas:h12:b   " set font, font height, and font style (l: light, b: bold, i: italics)
 ```
 
