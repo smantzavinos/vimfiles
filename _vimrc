@@ -292,6 +292,34 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 
+"" grep word under cursor shortcut
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+function! s:GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+  return join(list, "\n")
+endfunction
+" Keymapping for grep word under cursor with interactive mode
+nnoremap <silent> <space>wg :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+
+"" grep for visual selection shortcut
+vnoremap <space>vg :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
+nnoremap <space>vg :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
+function! s:GrepFromSelected(type)
+  let saved_unnamed_register = @@
+  if a:type ==# 'v'
+    normal! `<v`>y
+  elseif a:type ==# 'char'
+    normal! `[v`]y
+  else
+    return
+  endif
+  let word = substitute(@@, '\n$', '', 'g')
+  let word = escape(word, '| ')
+  let @@ = saved_unnamed_register
+  execute 'CocList grep '.word
+endfunction
+
 
 "" coc extensions
 let g:coc_global_extensions = [
