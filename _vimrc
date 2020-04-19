@@ -4,8 +4,8 @@ call plug#begin('~/.vim/plugged')
 " Git plugin
 Plug 'tpope/vim-fugitive'
 
-" Solarized plugin that works well with neovim
-Plug 'icymind/neosolarized'
+" ayu theme
+Plug 'ayu-theme/ayu-vim'
 
 " CoC - Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -145,9 +145,9 @@ set colorcolumn=100
 " ~~~~~~~~~~~~ Plugin setttings
 
 " colorscheme settings
-set termguicolors
-set background=dark
-colorscheme neosolarized
+set termguicolors     " enable true colors support
+let ayucolor="mirage" " for mirage version of theme
+colorscheme ayu
 
 " Always show status line (recommended in eleline readme)
 set laststatus=2
