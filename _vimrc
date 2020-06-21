@@ -7,9 +7,6 @@ Plug 'tpope/vim-fugitive'
 " ayu theme
 Plug 'ayu-theme/ayu-vim'
 
-" C++ semantic highlighting using lanaguage server protocol
-Plug 'jackguo380/vim-lsp-cxx-highlight'
-
 " Fancy start page
 Plug 'mhinz/vim-startify'
 
