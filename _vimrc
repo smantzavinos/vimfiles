@@ -47,6 +47,9 @@ Plug 'scrooloose/nerdcommenter'
 " Auto change directory to project root
 Plug 'airblade/vim-rooter'
 
+" Rainbow parentheses
+Plug 'luochen1990/rainbow'
+
 call plug#end()
 
 " Map F2 to open NERDTree
@@ -156,6 +159,9 @@ colorscheme ayu
 
 " Always show status line (recommended in eleline readme)
 set laststatus=2
+
+" Enable ranibow parentheses
+let g:rainbow_active=1
 
 " Rename tab shortcut
 nnoremap <leader>tr :<C-u>call g:tabulous#renameTab()<cr>
@@ -275,8 +281,13 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
+nnoremap <silent> <space>l  :<C-u>CocList<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>r  :<C-u>CocListResume<CR>
+" Show all files
+nnoremap <silent> <space>f  :<C-u>CocList files<cr>
+" Show most recently used files
+nnoremap <silent> <space>m  :<C-u>CocList mru<cr>
 " Show all open buffers
 nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
 " Grep from current working directory
@@ -337,7 +348,8 @@ let g:coc_global_extensions = [
         \'coc-svelte',
         \'coc-json',
         \'coc-html',
-        \'coc-css'
+        \'coc-css',
+        \'coc-clangd'
         \]
 
 
