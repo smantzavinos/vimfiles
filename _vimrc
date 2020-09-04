@@ -137,9 +137,14 @@ nnoremap <F5> :<C-u>checktime<cr>
 " Add a marker at column 100
 set colorcolumn=100
 
-" Use terminal style tabs in GUI versions of vim
-"set guioptions-=e
-"set guitabline=0
+" This snippet was taken from:
+" https://www.reddit.com/r/neovim/comments/f0qx2y/automatically_reload_file_if_contents_changed/
+ " trigger `autoread` when files changes on disk
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" notification after file change
+autocmd FileChangedShellPost *
+\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 
 " ~~~~~~~~~~~~ Plugin setttings
