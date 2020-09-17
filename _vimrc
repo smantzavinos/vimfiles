@@ -10,6 +10,15 @@ Plug 'ayu-theme/ayu-vim'
 " CoC - Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Use fzf fuzzy search instead of the one built into coc
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+
+" Add icons. Supported by coc-fzf-preview and some other plugins.
+" Requires to use a font that supports icons, like nerd fonts.
+Plug 'ryanoasis/vim-devicons'
+
 " C++ semantic highlighting using lanaguage server protocol
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
@@ -17,7 +26,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'mhinz/vim-startify'
 
 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 
 " Syntax highlighting and indentation support for many languages
 Plug 'sheerun/vim-polyglot'
@@ -77,11 +86,24 @@ set expandtab
 " Backspacing over a tab (4 spaces) backspaces 4 spaces
 set softtabstop=4
 
-" Set the font to Consolas
-set guifont=Consolas
+let s:fontType = 'Hack'
+let s:fontSize = 11
+let &guifont = s:fontType . ":h" . s:fontSize
+
+" Function to increase/decrease font size
+function! AdjustFontSize(amount)
+  let s:fontSize = s:fontSize+a:amount
+  :execute "GuiFont!" . s:fontType . ':h' . string(s:fontSize)
+endfunction
+
+noremap <C-=> :call AdjustFontSize(1)<CR>
+noremap <C--> :call AdjustFontSize(-1)<CR>
 
 " Display line numbers
 set number
+
+" Needed for vim-devicons plugin
+set encoding=UTF-8
 
 " Highlight all search matches in file
 set hlsearch
@@ -156,6 +178,11 @@ autocmd FileChangedShellPost *
 set termguicolors     " enable true colors support
 let ayucolor="mirage" " for mirage version of theme
 colorscheme ayu
+
+" Startify to use devicons
+function! StartifyEntryFormat()
+   return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
 
 " Always show status line (recommended in eleline readme)
 set laststatus=2
@@ -280,28 +307,34 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+" Add CocFzfList sources that aren't supported by default
+" add_list_source(name, description, command)
+call coc_fzf#common#add_list_source('fzf-grep', 'search using ripgrep', 'grep')
+
 " Mappings using CoCList:
-nnoremap <silent> <space>l  :<C-u>CocList<CR>
+nnoremap <silent> <space>l  :<C-u>CocFzfList<CR>
 " Resume latest coc list.
-nnoremap <silent> <space>r  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>r  :<C-u>CocFzfListResume<CR>
 " Show all files
-nnoremap <silent> <space>f  :<C-u>CocList files<cr>
+nnoremap <silent> <space>f  :<C-u>CocFzfList files<cr>
+nnoremap <C-p> :<C-u>CocFzfList files<cr>
 " Show most recently used files
-nnoremap <silent> <space>m  :<C-u>CocList mru<cr>
+nnoremap <silent> <space>m  :<C-u>CocFzfList mru<cr>
 " Show all open buffers
-nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
+nnoremap <silent> <space>b  :<C-u>CocFzfList buffers<cr>
 " Grep from current working directory
-nnoremap <silent> <space>g  :<C-u>CocList grep<CR>
+nnoremap <silent> <space>g  :<C-u>CocFzfList grep<CR>
 " Show all diagnostics.
-nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocFzfList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :<C-u>CocFzfList extensions<cr>
 " Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
 " Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
 " Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocFzfList -I symbols<cr>
+
 
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
@@ -309,14 +342,14 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 
 "" grep word under cursor shortcut
-command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocFzfList grep '.<q-args>
 function! s:GrepArgs(...)
   let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
         \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
   return join(list, "\n")
 endfunction
 " Keymapping for grep word under cursor with interactive mode
-nnoremap <silent> <space>wg :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+nnoremap <silent> <space>wg :exe 'CocFzfList -I --input='.expand('<cword>').' grep'<CR>
 
 "" grep for visual selection shortcut
 vnoremap <space>vg :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
@@ -333,7 +366,7 @@ function! s:GrepFromSelected(type)
   let word = substitute(@@, '\n$', '', 'g')
   let word = escape(word, '| ')
   let @@ = saved_unnamed_register
-  execute 'CocList grep '.word
+  execute 'CocFzfList grep '.word
 endfunction
 
 
@@ -349,9 +382,9 @@ let g:coc_global_extensions = [
         \'coc-json',
         \'coc-html',
         \'coc-css',
-        \'coc-clangd'
+        \'coc-clangd',
+        \'coc-git'
         \]
-
 
 "" coc-explorer settings
 nnoremap <leader>e :<C-u>CocCommand explorer<cr>
