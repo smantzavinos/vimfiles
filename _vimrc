@@ -86,7 +86,7 @@ set expandtab
 " Backspacing over a tab (4 spaces) backspaces 4 spaces
 set softtabstop=4
 
-let s:fontType = 'Hack'
+let s:fontType = 'Consolas NF'
 let s:fontSize = 11
 let &guifont = s:fontType . ":h" . s:fontSize
 
