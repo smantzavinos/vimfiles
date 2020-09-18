@@ -54,6 +54,25 @@ the following line
 GuiPopupmenu 0
 ```
 
+## Additional dependencies
+
+1. Preferred font [Consolas NF](https://github.com/whitecolor/my-nerd-fonts/tree/master/Consolas%20NF)
+
+2. For coc-fzf
+'''
+choco install fzf 
+'''
+
+3. For colors in coc-fzf window
+'''
+choco install bat
+'''
+
+4. For grepping with ripgrep (rg)
+'''
+choco install ripgrep
+'''
+
 ## Useful commands
 
 ### vim-startify
