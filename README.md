@@ -56,6 +56,11 @@ GuiPopupmenu 0
 
 ## Additional dependencies
 
+0. node required for coc extension. Install using node verion manager (nvm) or
+```
+choco install nodejs
+```
+
 1. Preferred font [Consolas NF](https://github.com/whitecolor/my-nerd-fonts/tree/master/Consolas%20NF)
 
 2. For coc-fzf
