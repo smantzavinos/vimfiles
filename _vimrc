@@ -102,6 +102,9 @@ noremap <C--> :call AdjustFontSize(-1)<CR>
 " Display line numbers
 set number
 
+" Show line numbers as relative to the current line
+set relativenumber
+
 " Needed for vim-devicons plugin
 set encoding=UTF-8
 
