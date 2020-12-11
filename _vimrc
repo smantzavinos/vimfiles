@@ -51,7 +51,9 @@ Plug 'webdevel/tabulous'
 Plug 'Yggdroot/indentLine'
 
 " Comment code shortcuts
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
+" Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
 
 " Auto change directory to project root
 Plug 'airblade/vim-rooter'
@@ -241,7 +243,6 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
