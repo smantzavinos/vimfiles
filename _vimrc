@@ -63,6 +63,9 @@ Plug 'airblade/vim-rooter'
 " Rainbow parentheses
 Plug 'luochen1990/rainbow'
 
+" Bookmarks
+Plug 'MattesGroeger/vim-bookmarks'
+
 call plug#end()
 
 " Map F2 to open NERDTree
@@ -202,6 +205,10 @@ set laststatus=2
 
 " Enable ranibow parentheses
 let g:rainbow_active=1
+
+" vim-bookmarks config
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+let g:bookmark_sign = '⚑'
 
 " Rename tab shortcut
 nnoremap <leader>tr :<C-u>call g:tabulous#renameTab()<cr>
