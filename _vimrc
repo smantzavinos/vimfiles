@@ -15,6 +15,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'junegunn/fzf.vim' " needed for previews
 "Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 
+Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
+
 " Add icons. Supported by coc-fzf-preview and some other plugins.
 " Requires to use a font that supports icons, like nerd fonts.
 Plug 'ryanoasis/vim-devicons'
