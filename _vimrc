@@ -24,6 +24,9 @@ Plug 'ryanoasis/vim-devicons'
 " C++ semantic highlighting using lanaguage server protocol
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
+" clang format plugin
+Plug 'rhysd/vim-clang-format'
+
 " Fancy start page
 Plug 'mhinz/vim-startify'
 
