@@ -69,6 +69,9 @@ Plug 'luochen1990/rainbow'
 " Bookmarks
 Plug 'MattesGroeger/vim-bookmarks'
 
+" Elixir support
+Plug 'elixir-editors/vim-elixir'
+
 call plug#end()
 
 " Map F2 to open NERDTree
