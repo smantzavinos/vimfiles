@@ -33,6 +33,7 @@ $uri = 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 :PlugInstall
 ```
+Note: Node needs to be installed for coc.nvim extension to work.
 
 ## Install on Ubunutu
 
@@ -61,6 +62,30 @@ GuiTabline 0
 the following line
 ```
 GuiPopupmenu 0
+```
+
+## Additional dependencies
+
+0. node required for coc extension. Install using node verion manager (nvm) or
+```
+choco install nodejs
+```
+
+1. Preferred font [Consolas NF](https://github.com/whitecolor/my-nerd-fonts/tree/master/Consolas%20NF)
+
+2. For coc-fzf
+```
+choco install fzf 
+```
+
+3. For colors in coc-fzf window
+```
+choco install bat
+```
+
+4. For grepping with ripgrep (rg)
+```
+choco install ripgrep
 ```
 
 ## Useful commands

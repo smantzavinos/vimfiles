@@ -10,14 +10,28 @@ Plug 'ayu-theme/ayu-vim'
 " CoC - Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" Use fzf fuzzy search instead of the one built into coc
+"Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+"Plug 'junegunn/fzf.vim' " needed for previews
+"Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+
+Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
+
+" Add icons. Supported by coc-fzf-preview and some other plugins.
+" Requires to use a font that supports icons, like nerd fonts.
+Plug 'ryanoasis/vim-devicons'
+
 " C++ semantic highlighting using lanaguage server protocol
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+" clang format plugin
+Plug 'rhysd/vim-clang-format'
 
 " Fancy start page
 Plug 'mhinz/vim-startify'
 
 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 
 " Syntax highlighting and indentation support for many languages
 Plug 'sheerun/vim-polyglot'
@@ -42,7 +56,21 @@ Plug 'webdevel/tabulous'
 Plug 'Yggdroot/indentLine'
 
 " Comment code shortcuts
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
+" Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
+
+" Auto change directory to project root
+Plug 'airblade/vim-rooter'
+
+" Rainbow parentheses
+Plug 'luochen1990/rainbow'
+
+" Bookmarks
+Plug 'MattesGroeger/vim-bookmarks'
+
+" Elixir support
+Plug 'elixir-editors/vim-elixir'
 
 " Auto change directory to project root
 Plug 'airblade/vim-rooter'
@@ -74,11 +102,33 @@ set expandtab
 " Backspacing over a tab (4 spaces) backspaces 4 spaces
 set softtabstop=4
 
-" Set the font to Consolas
-set guifont=Consolas
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+let s:fontType = 'Consolas NF'
+let s:fontSize = 11
+let &guifont = s:fontType . ":h" . s:fontSize
+
+" Function to increase/decrease font size
+function! AdjustFontSize(amount)
+  let s:fontSize = s:fontSize+a:amount
+  :execute "GuiFont!" . s:fontType . ':h' . string(s:fontSize)
+endfunction
+
+noremap <C-=> :call AdjustFontSize(1)<CR>
+noremap <C--> :call AdjustFontSize(-1)<CR>
 
 " Display line numbers
 set number
+
+" Show line numbers as relative to the current line
+set relativenumber
+
+" Needed for vim-devicons plugin
+set encoding=UTF-8
 
 " Highlight all search matches in file
 set hlsearch
@@ -137,9 +187,14 @@ nnoremap <F5> :<C-u>checktime<cr>
 " Add a marker at column 100
 set colorcolumn=100
 
-" Use terminal style tabs in GUI versions of vim
-"set guioptions-=e
-"set guitabline=0
+" This snippet was taken from:
+" https://www.reddit.com/r/neovim/comments/f0qx2y/automatically_reload_file_if_contents_changed/
+ " trigger `autoread` when files changes on disk
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" notification after file change
+autocmd FileChangedShellPost *
+\ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
 
 " ~~~~~~~~~~~~ Plugin setttings
@@ -149,8 +204,20 @@ set termguicolors     " enable true colors support
 let ayucolor="mirage" " for mirage version of theme
 colorscheme ayu
 
+" Startify to use devicons
+function! StartifyEntryFormat()
+   return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
+
 " Always show status line (recommended in eleline readme)
 set laststatus=2
+
+" Enable ranibow parentheses
+let g:rainbow_active=1
+
+" vim-bookmarks config
+highlight BookmarkSign ctermbg=NONE ctermfg=160
+let g:bookmark_sign = '⚑'
 
 " Rename tab shortcut
 nnoremap <leader>tr :<C-u>call g:tabulous#renameTab()<cr>
@@ -200,7 +267,6 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
@@ -269,9 +335,20 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+" Add CocList sources that aren't supported by default
+" add_list_source(name, description, command)
+"call coc_fzf#common#add_list_source('fzf-grep', 'search using ripgrep', 'grep')
+
 " Mappings using CoCList:
+nnoremap <silent> <space>l  :<C-u>CocList<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>r  :<C-u>CocListResume<CR>
+" Show all files
+nnoremap <silent> <space>f  :<C-u>CocList files<cr>
+nnoremap <C-p> :<C-u>CocList files<cr>
+" Show most recently used files
+nnoremap <silent> <space>m  :<C-u>CocList mru<cr>
+
 " Show all open buffers
 nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
 " Grep from current working directory
@@ -332,9 +409,10 @@ let g:coc_global_extensions = [
         \'coc-svelte',
         \'coc-json',
         \'coc-html',
-        \'coc-css'
+        \'coc-css',
+        \'coc-clangd',
+        \'coc-git'
         \]
-
 
 "" coc-explorer settings
 nnoremap <leader>e :<C-u>CocCommand explorer<cr>
