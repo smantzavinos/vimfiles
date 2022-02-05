@@ -72,6 +72,9 @@ Plug 'MattesGroeger/vim-bookmarks'
 " Elixir support
 Plug 'elixir-editors/vim-elixir'
 
+" Auto change directory to project root
+Plug 'airblade/vim-rooter'
+
 call plug#end()
 
 " Map F2 to open NERDTree
@@ -345,6 +348,7 @@ nnoremap <silent> <space>f  :<C-u>CocList files<cr>
 nnoremap <C-p> :<C-u>CocList files<cr>
 " Show most recently used files
 nnoremap <silent> <space>m  :<C-u>CocList mru<cr>
+
 " Show all open buffers
 nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
 " Grep from current working directory
@@ -359,7 +363,6 @@ nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-
 
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
