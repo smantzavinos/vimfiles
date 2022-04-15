@@ -11,9 +11,9 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Use fzf fuzzy search instead of the one built into coc
-"Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
-"Plug 'junegunn/fzf.vim' " needed for previews
-"Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
 
 Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
@@ -221,6 +221,9 @@ let g:bookmark_sign = '⚑'
 
 " Rename tab shortcut
 nnoremap <leader>tr :<C-u>call g:tabulous#renameTab()<cr>
+
+" Start fzf in a popup window
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 " ~~ CoC settings
 " TextEdit might fail if hidden is not set.
