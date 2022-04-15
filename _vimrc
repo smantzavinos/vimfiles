@@ -343,44 +343,46 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 "call coc_fzf#common#add_list_source('fzf-grep', 'search using ripgrep', 'grep')
 
 " Mappings using CoCList:
-nnoremap <silent> <space>l  :<C-u>CocList<CR>
+nnoremap <silent> <space>l  :<C-u>CocFzfList<CR>
 " Resume latest coc list.
-nnoremap <silent> <space>r  :<C-u>CocListResume<CR>
+nnoremap <silent> <space>r  :<C-u>CocFzfListResume<CR>
 " Show all files
-nnoremap <silent> <space>f  :<C-u>CocList files<cr>
+nnoremap <silent> <space>f  :<C-u>CocFzfList files<cr>
 nnoremap <C-p> :<C-u>CocList files<cr>
 " Show most recently used files
-nnoremap <silent> <space>m  :<C-u>CocList mru<cr>
+nnoremap <silent> <space>m  :<C-u>CocFzfList mru<cr>
 
 " Show all open buffers
-nnoremap <silent> <space>b  :<C-u>CocList buffers<cr>
+nnoremap <silent> <space>b  :<C-u>CocFzfList fzf-buffers<cr>
 " Grep from current working directory
-nnoremap <silent> <space>g  :<C-u>CocList grep<CR>
+nnoremap <silent> <space>g  :<C-u>CocFzfList grep<CR>
 " Show all diagnostics.
-nnoremap <silent> <space>d  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>d  :<C-u>CocFzfList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :<C-u>CocFzfList extensions<cr>
 " Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocFzfList commands<cr>
 " Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :<C-u>CocFzfList outline<cr>
 " Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocFzfList -I symbols<cr>
 
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 
+call coc_fzf#common#add_list_source('fzf-buffers', 'display open buffers', 'Buffers')
+
 "" grep word under cursor shortcut
-command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocFzfList grep '.<q-args>
 function! s:GrepArgs(...)
   let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
         \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
   return join(list, "\n")
 endfunction
 " Keymapping for grep word under cursor with interactive mode
-nnoremap <silent> <space>wg :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+nnoremap <silent> <space>wg :exe 'CocFzfList -I --input='.expand('<cword>').' grep'<CR>
 
 "" grep for visual selection shortcut
 vnoremap <space>vg :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
@@ -397,7 +399,7 @@ function! s:GrepFromSelected(type)
   let word = substitute(@@, '\n$', '', 'g')
   let word = escape(word, '| ')
   let @@ = saved_unnamed_register
-  execute 'CocList grep '.word
+  execute 'CocFzfList grep '.word
 endfunction
 
 
