@@ -1,3 +1,6 @@
+# ARCHIVED
+NOTE: This repo is for archive purposes and should not be updated anymore. It's content has been moved to my [dotfiles repo](https://github.com/smantzavinos/dotfiles)
+
 # vimfiles
 
 ## Installation/setup on Windows using neovim
